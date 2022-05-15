@@ -1,8 +1,8 @@
 # Bio-Comp
 
-This is the repository of the homework for the course Biological Computation done by
-Ilay Tzuberi 211873286
-Omri Baron   314838210
+This is the repository of the homework for the course Biological Computation done by  
+Ilay Tzuberi 211873286  
+Omri Baron   314838210  
 
 ## Exercise #1
 
