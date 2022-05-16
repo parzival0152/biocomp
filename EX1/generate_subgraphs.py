@@ -5,7 +5,7 @@ from networkx import DiGraph,is_isomorphic
 
 # powerset generator function taken from pythons native itertools lib examples
 # the power set is needed to model the different choices of nodes from (n-1) to connect to the nth node
-def powerset(iterable):
+def powerset(iterable:list[any]):
     "powerset([1,2,3]) --> () (1,) (2,) (3,) (1,2) (1,3) (2,3) (1,2,3)"
     s = list(iterable)
     return chain.from_iterable(combinations(s, r) for r in range(len(s)+1))
@@ -17,7 +17,7 @@ graphbank = { # used for memoization to reduce back calls to lower n
 }
 
 
-def subgraph(n):
+def subgraph(n:int) -> list[list[tuple[int,int]]]:
     if n not in graphbank.keys(): # if we dont have the answer stored, compute it then store it
         nminus1 = subgraph(n-1) # get the n-1 size graphs
         PS = list(powerset(range(1, n)))[1:] # generate a powerset for the nodes of the n-1 graphs and ignore the empty set (the first set)
@@ -35,7 +35,7 @@ def subgraph(n):
         graphbank[n] = purgeisomorphism(nlist) # remove all isomorphic graphs then store the answer
     return graphbank[n] # in the end serve the stored answer
 
-def purgeisomorphism(graphlist):
+def purgeisomorphism(graphlist:list[list[tuple[int,int]]]) -> list[list[tuple[int,int]]]:
     # this purging algorithem works with the sieve method of choosing the first graph and adding it to a "safe" buffer
     # then on each pass we remove from the list all the graphs that are isomorphic to the chosen graph
     # repeat till the list we were given is empty then we can be sure that the list of "safe" graphs are all non isomorphic to one another
